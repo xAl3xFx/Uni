@@ -4,15 +4,40 @@ using namespace std;
 class Rational{
 private:
     int nom,denom;
+    void normalise();
 public:
     Rational(const int, const int);
+    Rational operator+(const Rational&);
+    Rational operator-(const Rational&);
+    Rational operator*(const Rational&);
+    Rational operator/(const Rational&);
+
+
     void print()const;
 
 };
-
+void Rational::normalise(){
+    int x=nom,y=denom;
+    while(x!=0){
+        if(x<y)swap(x,y);
+        x=x%y;
+    }
+    nom/=y;
+    denom/=y;
+    if(y<0){
+        nom*=-1;
+        denom*=-1;
+    }
+}
 Rational::Rational(const int p=0, const int q=1){
     nom=p;
     denom=q;
+}
+
+Rational Rational::operator+(const Rational& other){
+    Rational newR(nom*other.denom+denom*other.nom, denom*other.denom);
+    newR.normalise();
+    return newR;
 }
 
 void Rational::print()const{
@@ -22,8 +47,10 @@ void Rational::print()const{
 int main(){
     Rational r;
     Rational r1(1,2);
+    Rational r2(1,6);
     r.print();
     r1.print();
+    (r2+r1).print();
 
 
 return 0;
