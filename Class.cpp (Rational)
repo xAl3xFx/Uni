@@ -12,7 +12,6 @@ public:
     Rational operator*(const Rational&);
     Rational operator/(const Rational&);
 
-
     void print()const;
 
 };
@@ -29,6 +28,7 @@ void Rational::normalise(){
         denom*=-1;
     }
 }
+
 Rational::Rational(const int p=0, const int q=1){
     nom=p;
     denom=q;
@@ -36,6 +36,24 @@ Rational::Rational(const int p=0, const int q=1){
 
 Rational Rational::operator+(const Rational& other){
     Rational newR(nom*other.denom+denom*other.nom, denom*other.denom);
+    newR.normalise();
+    return newR;
+}
+
+Rational Rational::operator-(const Rational& other){
+    Rational newR(nom*other.denom-denom*other.nom, denom*other.denom);
+    newR.normalise();
+    return newR;
+}
+
+Rational Rational::operator*(const Rational& other){
+    Rational newR(nom*other.nom, denom*other.denom);
+    newR.normalise();
+    return newR;
+}
+
+Rational Rational::operator/(const Rational& other){
+    Rational newR(nom*other.denom, denom*other.nom);
     newR.normalise();
     return newR;
 }
@@ -50,7 +68,8 @@ int main(){
     Rational r2(1,6);
     r.print();
     r1.print();
-    (r2+r1).print();
+    (r2/r1).print();
+
 
 
 return 0;
