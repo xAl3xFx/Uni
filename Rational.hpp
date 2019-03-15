@@ -1,5 +1,8 @@
+#ifndef RATIONAL_H
+#define RATIONAL_H
+
+
 #include<iostream>
-using namespace std;
 
 class Rational{
 private:
@@ -18,7 +21,7 @@ public:
 void Rational::normalise(){
     int x=nom,y=denom;
     while(x!=0){
-        if(x<y)swap(x,y);
+        if(x<y)std::swap(x,y);
         x=x%y;
     }
     nom/=y;
@@ -59,18 +62,7 @@ Rational Rational::operator/(const Rational& other){
 }
 
 void Rational::print()const{
-    cout << nom << "/"<<denom<< endl;
+    std::cout << nom << "/"<<denom<< std::endl;
 }
 
-int main(){
-    Rational r;
-    Rational r1(1,2);
-    Rational r2(1,6);
-    r.print();
-    r1.print();
-    (r2/r1).print();
-
-
-
-return 0;
-}
+#endif // RATIONAL_H
